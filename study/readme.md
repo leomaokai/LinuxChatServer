@@ -92,5 +92,26 @@ nginx.conf 配置文件
 
 # Redis消息队列
 
+redis的发布-订阅机制：发布-订阅模式包含了两种角色，分别是消息的发布者和消息的订阅者。订阅者可以订阅一个或者多个频道channel，发布者可以向指定的频道channel发送消息，所有订阅此频道的订阅者都会收到此消息。
 
+一些命令：
+
+```bash
+subscribe "news.it" #客户端执行此命令将成为"news.it"频道的订阅者
+publish "news.it" "hello" #客户端执行此命令向频道发送消息
+unsubscribe "news.it" #退订频道
+psubscribe pattern #订阅一个或多个符合给定模式的频道
+pubsub pattern #查看订阅与发布系统状态
+punsubscribe pattern #退订所有给定模式的频道
+```
+
+Redis对应C++的编程库为`hiredis`
+
+```bash
+git clone https://github.com/redis/hiredis
+cd hiredis
+make
+make install
+sudo ldconfig /usr/local/lib #拷贝动态库到/usr/local/lib目录
+```
 
